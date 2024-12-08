@@ -18,7 +18,7 @@ const grouppedHeadings = headings.reduce((array, heading) => {
 ---
 
 <nav id="table-of-contents" aria-label="Table Of Contents">
-  <ol>
+  <ul class="list-none">
     {
       grouppedHeadings.map((h) => (
         <li>
@@ -35,7 +35,7 @@ const grouppedHeadings = headings.reduce((array, heading) => {
         </li>
       ))
     }
-  </ol>
+  </ul>
 </nav>
 
 <style is:global>
