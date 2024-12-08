@@ -1,0 +1,117 @@
+---
+import BaseHead from "../components/base/BaseHead.astro";
+import Header from "../components/base/Header.astro";
+import Footer from "../components/base/Footer.astro";
+import HeaderImage from "../components/blog/HeaderImage.astro";
+import AuthorBio from "../components/blog/AuthorBio.astro";
+
+interface Props {
+  frontmatter: {
+    heroImage: {
+      src: string;
+      alt: string;
+    };
+    title: string;
+    updatedDate: string;
+    description: string;
+    pubDate: string;
+    updatedTime: string;
+  };
+}
+
+const { frontmatter } = Astro.props;
+---
+
+<html lang="en" class="scroll-smooth">
+  <head>
+    <BaseHead title={frontmatter.title} description={frontmatter.description} />
+  </head>
+
+  <body class="bg-white-50 dark:bg-black-900 dark:text-white-50">
+    <Header />
+    <main class="margin-top padding-bottom-xxl">
+      <article>
+        <header>
+          <div
+            class="flex lg:flex-row justify-stretch items-center flex-col bg-primary-200"
+            id="article-header"
+          >
+            <!-- Article Header  -->
+
+            <!-- Article Header Image  -->
+            <HeaderImage
+              imagePath={frontmatter.heroImage.src}
+              alt={frontmatter.heroImage.alt}
+            />
+
+            <!-- Article Header Image End -->
+            <div
+              class="flex flex-col justify-center items-center text-balance w-full bg-primary-200 padding-xdir text-center slash dark:text-black-900"
+              id="article-title"
+            >
+              <!-- Article Title  -->
+              <small>
+                <time
+                  datetime={new Date(frontmatter.updatedDate).toISOString()}
+                >
+                  Updated on {
+                    new Date(frontmatter.updatedDate).toLocaleDateString(
+                      undefined,
+                      {
+                        dateStyle: "medium",
+                        timeZone: "UTC",
+                      }
+                    )
+                  }
+                </time>
+              </small>
+              <h1>{frontmatter.title}</h1>
+            </div>
+            <!-- Article Title End -->
+          </div>
+          <!-- Article Header End -->
+        </header>
+        <div class="grid grid-cols-12 margin-top-sma" id="article-body">
+          <!-- Article Body  -->
+          <div
+            class="md:col-start-5 md:col-span-6 col-span-10 col-start-2"
+            id="single-article"
+          >
+            <!-- Article Text and Meta -->
+            <aside>
+              <AuthorBio />
+            </aside>
+            <slot />
+          </div>
+          <!-- Article Text and Meta End -->
+        </div>
+        <!-- Article Body End -->
+      </article>
+      <Footer />
+      <style>
+        #article-title {
+          margin-block-start: 0.5em;
+        }
+        /*  .mobile-toc {
+          border-top-left-radius: 15px;
+          border-bottom-right-radius: 15px;
+        }
+
+        details summary {
+          cursor: pointer;
+        }
+
+        details:not([open]):hover,
+        details:not([open]):focus {
+          background: #4db6ac;
+        } */
+      </style>
+    </main>
+  </body>
+</html>
+
+<style>
+  #single-article {
+    max-width: 65ch;
+  }
+</style>

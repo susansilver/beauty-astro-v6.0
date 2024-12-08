@@ -1,0 +1,15 @@
+---
+interface Props {
+  cite: string;
+  show: boolean;
+}
+
+const { cite, show } = Astro.props;
+---
+
+<blockquote>
+  <p>
+    <slot />
+    {show && <span class="attribution dark:text-black-900">- {cite}</span>}
+  </p>
+</blockquote>

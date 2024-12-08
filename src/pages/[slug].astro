@@ -1,0 +1,253 @@
+---
+import {
+  getEntries,
+  render,
+  getCollection,
+  type CollectionEntry,
+} from "astro:content";
+
+import Header from "../components/base/Header.astro";
+
+import AuthorBio from "../components/blog/AuthorBio.astro";
+import Support from "../components/blog/PaymentButtons.astro";
+import BaseHead from "../components/base/BaseHead.astro";
+import Footer from "../components/base/Footer.astro";
+
+import { Image } from "astro:assets";
+import TableOfContents from "../components/TableOfContents.astro";
+
+// 1. Generate a new path for every collection entry
+export async function getStaticPaths() {
+  const blogEntries = await getCollection("blog");
+
+  return blogEntries.map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
+}
+
+interface Props {
+  entry: CollectionEntry<"blog">;
+}
+
+// 2. When it's time to render, you can get the entry directly from the prop
+const { entry } = Astro.props;
+const { Content, headings } = await render(entry);
+
+const show = entry.data.show;
+const relatedPosts = await getEntries(entry.data.related);
+---
+
+<html lang="en" class="scroll-smooth">
+  <head>
+    <BaseHead
+      title={entry.data.title}
+      description={entry.data.description}
+      image={entry.data.publicSrc}
+    />
+  </head>
+
+  <body class="bg-white-50 dark:bg-black-900 dark:text-white-50">
+    <Header />
+    <main class="margin-top padding-bottom-xxl">
+      <article>
+        <header>
+          <div
+            class="flex lg:flex-row justify-stretch items-center flex-col bg-primary-200"
+            id="article-header"
+          >
+            <!-- Article Header  -->
+
+            <!-- Article Header Image  -->
+
+            <div class="wrap" id="header-image">
+              <Image
+                src={entry.data.heroImage.src}
+                width={950}
+                height={300}
+                format="avif"
+                quality="mid"
+                alt={entry.data.heroImage.alt}
+              />
+            </div>
+
+            <!-- Article Header Image End -->
+            <div
+              class="flex flex-col justify-center items-center text-balance w-full bg-primary-200 padding-xdir text-center slash dark:text-black-900"
+              id="article-title"
+            >
+              <!-- Article Title  -->
+              <small>
+                <time datetime={new Date(entry.data.updatedDate).toISOString()}>
+                  Updated on {
+                    new Date(entry.data.updatedDate).toLocaleDateString(
+                      undefined,
+                      {
+                        dateStyle: "medium",
+                        timeZone: "UTC",
+                      }
+                    )
+                  }
+                </time>
+              </small>
+              <h1>{entry.data.title}</h1>
+            </div>
+            <!-- Article Title End -->
+          </div>
+          <!-- Article Header End -->
+        </header>
+        <div class="grid grid-cols-12 margin-top-sma" id="article-body">
+          <!-- Article Body  -->
+          <div class="md:col-span-2 md:col-start-2" id="article-nav">
+            <div class="sticky top-0 md:block hidden">
+              {
+                show && headings && headings.length > 0 && (
+                  <>
+                    <h3>Table of Contents</h3>
+                    <TableOfContents headings={headings} />
+                  </>
+                )
+              }
+            </div>
+            <div>
+              {
+                show && headings && headings.length > 0 && (
+                  <details class="md:hidden block fixed bottom-0 left-0 w-full bg-accent-50 border-accent-300 border-4 z-10 mobile-toc dark:text-black-900">
+                    <summary class="p-3">Table of Contents</summary>
+                    <span class="margin-top">
+                      <TableOfContents headings={headings} />
+                    </span>
+                  </details>
+                )
+              }
+            </div>
+          </div>
+
+          <div
+            class="md:col-start-5 md:col-span-6 col-span-10 col-start-2 article-content"
+            id="single-article"
+          >
+            <!-- Article Text and Meta -->
+            <aside>
+              <AuthorBio />
+            </aside>
+            <Content />
+            <aside>
+              <Support />
+            </aside>
+            <aside>
+              <h3>Continue Reading</h3>
+              <ol>
+                {
+                  relatedPosts.map((post) => (
+                    <li>
+                      <a href={`/${post.id}`}>{post.data.title}</a>
+                    </li>
+                  ))
+                }
+              </ol>
+            </aside>
+            <aside>
+              <h3>More Like This</h3>
+              <div id="article-footer" class="grid">
+                <!-- Tags and Categories -->
+                <ul class="list-none flex justify-start gap-4 grid grid-cols-4">
+                  <li class="category col-span-2">
+                    Category: {
+                      entry.data.categories ? (
+                        <a
+                          class="underline"
+                          href={`/category/${entry.data.categories}`}
+                          title={`View posts in "${entry.data.categories}"`}
+                        >
+                          {entry.data.categories.replace(/-/g, " ")}
+                        </a>
+                      ) : (
+                        "No category found"
+                      )
+                    }
+                  </li>
+                  <li class="tags flex flex-row col-span-2">
+                    <span>Explore:</span>
+                    <ul class="list-none flex flex-row flex-wrap">
+                      {
+                        entry.data.tags && entry.data.tags.length > 0 ? (
+                          entry.data.tags.map((tag) => (
+                            <li class="tag">
+                              <a
+                                class="hover:text-black-900 visited:text-black-900 text-black-900 underline"
+                                href={`/tag/${tag}`}
+                                title={`View posts tagged "${tag}"`}
+                              >
+                                #{tag.replace(/-/g, " ")}
+                              </a>
+                            </li>
+                          ))
+                        ) : (
+                          <li class="tag">No tags found.</li>
+                        )
+                      }
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+              <!-- End Tags and Categories -->
+            </aside>
+          </div>
+          <!-- Article Text and Meta End -->
+        </div>
+        <!-- Article Body End -->
+      </article>
+      <Footer />
+      <style>
+        #single-article {
+          max-width: 65ch;
+        }
+
+        .mobile-toc {
+          border-top-left-radius: 15px;
+          border-bottom-right-radius: 15px;
+        }
+
+        details summary {
+          cursor: pointer;
+        }
+
+        details:not([open]):hover,
+        details:not([open]):focus {
+          background: #4db6ac;
+        }
+
+        .category,
+        .tags {
+          text-transform: capitalize;
+        }
+        .tag {
+          background-color: #f8bbd0;
+          padding: 0.5em;
+          border-radius: 5px;
+          margin: 0.5em;
+        }
+
+        @media (prefers-color-scheme: dark) {
+          .tag {
+            background-color: #880e4f;
+          }
+
+          .tag a,
+          .tag a:hover,
+          .tag a:visited {
+            color: #fafafa;
+          }
+        }
+
+        #article-title {
+          margin-block-start: 0.5em;
+        }
+      </style>
+    </main>
+  </body>
+</html>
+
+>
+

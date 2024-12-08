@@ -1,0 +1,177 @@
+---
+import { getCollection } from "astro:content";
+import { Image } from "astro:assets";
+import BaseHead from "../components/base/BaseHead.astro";
+import Header from "../components/base/Header.astro";
+import Footer from "../components/base/Footer.astro";
+
+const allPosts = (await getCollection("blog"))
+  .filter((post) => !post.data.draft)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
+
+const allTags = [
+  ...new Set(allPosts.flatMap((blogPost) => blogPost.data.tags)),
+];
+---
+
+<html lang="en">
+  <head>
+    <BaseHead title="Blog" description="The most current essays to read" />
+  </head>
+  <body class="bg-white-50 dark:text-white-50 dark:bg-black-900">
+    <Header />
+    <main>
+      <div class="grid grid-cols-12 margin-top" id="blog-archive">
+        <div
+          class="col-span-10 col-start-2 col-end-11 lar p-3 bg-slate-200 dark:bg-slate-700 rounded-xl text-black-900"
+        >
+          <a
+            href="/archive"
+            class="no-underline w-full flex lg:justify-center justify-end"
+          >
+            View All ➤</a
+          >
+        </div>
+
+        <div
+          id="container"
+          class="lg:flex lg:flex-wrap justify-center items-center col-span-10 col-start-2 col-end-11 margin-top-sma"
+        >
+          {
+            allPosts.map((post) => (
+              <>
+                <div class="p-5 relative" id="header">
+                  <a href={`/${post.id}`} class="no-underline">
+                    <div class="relative lg:text-[1.563rem] med pile">
+                      <div class="wrap flex justify-stretch" id="header-image">
+                        <Image
+                          src={post.data.heroImage.src}
+                          alt={post.data.heroImage.alt}
+                          width={500}
+                          height={300}
+                          format="avif"
+                          quality="mid"
+                        />
+                      </div>
+                      <div
+                        class="absolute text-balance p-1 title text-black-900"
+                        id="article-title"
+                      >
+                        {post.data.title}
+                      </div>
+                    </div>
+                  </a>
+                </div>
+              </>
+            ))
+          }
+        </div>
+
+        <div
+          class="col-span-10 col-start-2 col-end-11 margin-bottom"
+          id="tag-list"
+        >
+          <aside class="lg:flex lg:flex-row">
+            <div>Explore:</div>
+            <ul class="flex flex-row list-none flex-wrap">
+              {
+                allTags.map((tag) => {
+                  // Check if category is defined
+                  if (tag) {
+                    return (
+                      <li class="m-3">
+                        <a
+                          class="tag dark:text-white-50 dark:hover:text-white-50 dark:visited:text-white-50 text-black-900 hover:text-black-900 visited:text-black-900 underline"
+                          href={`/tag/${tag}`}
+                          title={`View posts tagged "${tag}"`}
+                        >
+                          #{tag.replace(/-/g, " ")}
+                        </a>
+                      </li>
+                    );
+                  }
+                  // Return null if category is not defined
+                  return null;
+                })
+              }
+            </ul>
+          </aside>
+        </div>
+      </div>
+
+      <Footer />
+
+      <style>
+        .pile {
+          display: grid;
+          grid-template-areas: "pile";
+          place-items: center;
+          text-align: center;
+        }
+
+        .pile > * {
+          grid-area: pile;
+        }
+
+        .title {
+          max-width: 55ch;
+          padding: 0 1.5em;
+        }
+
+        #container > div:first-child {
+          width: 100%;
+        }
+
+        #container > div:first-child img {
+          width: 900px;
+          height: 450px;
+        }
+
+        @media screen and (max-width: 900px) {
+          #container {
+            max-width: fit-content;
+            padding: 0 0;
+          }
+          #container > div:first-child img {
+            width: auto;
+            height: auto;
+            aspect-ratio: 16/9;
+            object-fit: cover;
+          }
+        }
+
+        #container > div:first-child::after {
+          position: absolute;
+          content: "∯ New";
+          background-color: #e0f2f1;
+          filter: drop-shadow(#4db6ac 0.5em 0.5em 0);
+          max-width: 30ch;
+          padding: 1em;
+          top: 0;
+          right: 15%;
+          color: #212121;
+        }
+
+        .tag {
+          text-transform: capitalize;
+          background-color: #f8bbd0;
+          padding: 0.5em;
+          border-radius: 5px;
+        }
+
+        @media (prefers-color-scheme: dark) {
+          .tag {
+            background-color: #880e4f;
+          }
+
+          .tag a,
+          .tag a:hover,
+          .tag a:visited {
+            color: #fafafa !important;
+          }
+        }
+      </style>
+    </main>
+  </body>
+</html>

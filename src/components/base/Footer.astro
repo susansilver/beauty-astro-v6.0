@@ -1,0 +1,32 @@
+---
+import { Icon } from "astro-icon/components";
+---
+
+<footer
+  id="colophon"
+  class="text-black-900 dark:text-white-50 dark:bg-black-900"
+>
+  <div class="flex justify-center flex-row items-end m-5 gap-3">
+    <div>
+      &copy; 2018 - <span id="copy"></span>
+    </div>
+    <div>
+      <span class="flex flex-row">
+        <a href="https://susansilver.net/">Suzza Silver</a>
+        <Icon name="mdi:account-circle" class="sma text-slate-500" /></span
+      >
+    </div>
+  </div>
+</footer>
+
+<script>
+  const copyElement = document.querySelector("#copy");
+
+  if (copyElement !== null) {
+    (copyElement as HTMLElement).textContent = new Date()
+      .getFullYear()
+      .toString();
+  } else {
+    console.error('Element with ID "copy" not found.');
+  }
+</script>
