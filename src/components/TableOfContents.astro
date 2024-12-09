@@ -18,19 +18,19 @@ const grouppedHeadings = headings.reduce((array, heading) => {
 ---
 
 <nav id="table-of-contents" aria-label="Table Of Contents">
-  <ul class="list-none">
+  <ul>
     {
       grouppedHeadings.map((h) => (
         <li>
           <a href={`#${h.slug}`}>{h.text}</a>
           {h.subheadings.length > 0 && (
-            <ol>
+            <ul>
               {h.subheadings.map((sub) => (
                 <li>
                   <a href={`#${sub.slug}`}>{sub.text}</a>
                 </li>
               ))}
-            </ol>
+            </ul>
           )}
         </li>
       ))
