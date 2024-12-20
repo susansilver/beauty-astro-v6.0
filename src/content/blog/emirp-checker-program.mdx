@@ -1,0 +1,50 @@
+---
+title: Distract Yourself with an Emirp Checker
+pubDate: 2024-12-20
+categories: science-communication
+tags:
+  - math-communications
+  - primes
+  - programming
+description: A fun program to check if a number is an Emirp. A number that is prime and when it is reversed is a different prime.
+updatedDate: 2024-12-20
+heroImage:
+  alt: The mathematical symbol sigma in colors of pink and green on a white background
+  src: /src/assets/header-image-beauty-of-mathematics-sigma.jpg
+author: susan-silver
+draft: false
+related:
+  - new-year-update-2024
+  - national-day-of-mathematics-india
+  - the-annotated-numberphile-a-retrospective-by-year
+show: true
+publicSrc: /headers/header-image-beauty-of-mathematics-sigma.jpg
+---
+
+import EmirpChecker from "/src/components/programs/EmirpChecker.astro";
+
+I’ve applied for a coding retreat with[ the Recurse Center](https://www.recurse.com/). You need to send in a program created from scratch for the application. I knew that I wanted to do something about mathematics.
+
+I’m going through the freeCodeCamp JavaScript certification right now. One of the projects is creating a palindrome checker. I knew that I could expand on that to do something to check numbers as well. It is one of the things that you do that pushes your skills a little further than something you already know how to do.
+
+That is how I decided to create an Emirp checker. An Emirp is a prime that when you reverse its digits is still prime and is a different number. One thing that I had to remember was that one of the conditions was that it could not be a palindrome. Because the reverse digits are the same number. The sequence starts with 13 and[ is in the OEIS](https://oeis.org/A006567).
+
+## Emirp Checker
+
+<EmirpChecker />
+
+The most important thing that I learned was how to check if a number is prime. I thought this would be difficult. Most of the methods I found were beyond my skill level. But, then I got to thinking. To check if something is prime you only need to know the factors. Because it should only be divisible by one and itself.
+
+Did a little research and this was easy to do with a simple for loop. It is not the most efficient method. What matters is that I understood how to do it. I can now apply this skill anytime that I need to find all the factors of a number. Like, it wouldn’t be hard to create a program that finds the greatest common factor of two numbers.
+
+That seems important if you are programming math-related things.
+
+I wanted to share my Emirp checker since I’m part of the math community on[ Mathstodon](https://mathstodon.xyz/@suzza) and[ Finite Group](https://www.patreon.com/c/FiniteGroup/posts). It is a fun little distraction.
+
+## What I've Learned About Programming
+
+Doing tutorials and following courses is not that helpful for learning to program. You can always look up how to do something on the internet. What matters is understanding the why and not the how.
+
+I’m sometimes hard on myself when I have to look up how to do something. Somehow, it seems to me that these things should be intuitive. But, I realize that that doesn’t reflect my ability to learn. When I do this, I focus on understanding the logic of it. Learning how to read the code and understand what it represents. So that I can file it away for future use. If you know why you can expand on it later and make more complex things. You have to learn the basics and it is okay not to know things in the beginning.
+
+I’ve realized that my little Emirp program is not that impressive. On the application, they suggested submitting a program for a game of Tic, Tac, Toe. I’ve been thinking about how to do that. I know it involves using arrays to track if a square has an X or an O. You also need to manage the state of the board. That is in fact what they mean by state in JavaScript applications. Which makes a lot more sense to me now.
