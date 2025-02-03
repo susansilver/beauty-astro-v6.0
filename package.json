@@ -13,7 +13,6 @@
     "@astrojs/mdx": "^4.0.3",
     "@astrojs/rss": "^4.0.11",
     "@astrojs/sitemap": "^3.2.1",
-    "@astrojs/tailwind": "^5.1.4",
     "@iconify-json/mdi": "^1.2.2",
     "astro": "^5.1.2",
     "astro-embed": "^0.9.0",
