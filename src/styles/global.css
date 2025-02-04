@@ -250,7 +250,7 @@ blockquote {
   margin: auto;
         }
       } */
-button {
+.btn {
   padding: 1.5em;
   border: 5px solid #4db6ac;
   padding: 0.5em;
@@ -261,7 +261,7 @@ button {
   border-bottom-right-radius: 15px;
 }
 
-button:hover {
+.btn:hover {
   background-color: #4db6ac;
 }
 time {
