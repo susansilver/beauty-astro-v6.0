@@ -40,7 +40,7 @@ const allPosts = (await getCollection("blog"))
                       />
                     </div>
                     <div
-                      class="absolute positioning text-balance"
+                      class="absolute positioning text-balance xl"
                       id="featured-title"
                     >
                       {post.data.title}
@@ -73,7 +73,7 @@ const allPosts = (await getCollection("blog"))
         </a>
       </div>
       <div class="col-span-6 bg-primary-600 text-white-50" id="fourth-box">
-        <h1 class="flex justify-center items-center lg:text-7xl lar logo">
+        <h1 class="flex justify-center items-center text-7xl logo">
           Beauty of Mathematics
         </h1>
       </div>
@@ -112,24 +112,17 @@ const allPosts = (await getCollection("blog"))
         background-image: url("data:image/svg+xml,%3Csvg width='36' height='36' viewBox='0 0 36 36' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M36 0H0v36h36V0zM15.126 2H2v13.126c.367.094.714.24 1.032.428L15.554 3.032c-.188-.318-.334-.665-.428-1.032zM18 4.874V18H4.874c-.094-.367-.24-.714-.428-1.032L16.968 4.446c.318.188.665.334 1.032.428zM22.874 2h11.712L20 16.586V4.874c1.406-.362 2.512-1.468 2.874-2.874zm10.252 18H20v13.126c.367.094.714.24 1.032.428l12.522-12.522c-.188-.318-.334-.665-.428-1.032zM36 22.874V36H22.874c-.094-.367-.24-.714-.428-1.032l12.522-12.522c.318.188.665.334 1.032.428zm0-7.748V3.414L21.414 18h11.712c.362-1.406 1.468-2.512 2.874-2.874zm-18 18V21.414L3.414 36h11.712c.362-1.406 1.468-2.512 2.874-2.874zM4.874 20h11.712L2 34.586V22.874c1.406-.362 2.512-1.468 2.874-2.874z' fill='%2342a5f5' fill-opacity='0.51' fill-rule='evenodd'/%3E%3C/svg%3E");
       }
 
-      /*   .wrap {
-        position: relative;
-      }
+      @media (prefers-color-scheme: dark) {
+        a {
+          text-decoration: underline;
+          color: #212121;
+        }
 
-      .wrap:after {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(100, 181, 246, 0.75);
+        a:hover,
+        a:visited {
+          color: #880e4f;
+        }
       }
-
-      .wrap img {
-        -webkit-filter: grayscale(100%);
-        filter: grayscale(100%);
-      } */
     </style>
   </body>
 </html>

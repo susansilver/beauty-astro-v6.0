@@ -42,21 +42,22 @@ const categories = [
     </div>
     <MenuItems class="hidden lg:flex">
       <ul class="flex flex-col lg:flex-row list-none lg:items-center">
-        <li>
-          <HeaderLink href="/about">About</HeaderLink>
+        <li class="list-none">
+          <HeaderLink href="/about"
+            ><span class="lg:text-2xl">About</span></HeaderLink
+          >
         </li>
-        <li>
-          <HeaderLink href="/blog">Blog</HeaderLink>
+        <li class="list-none">
+          <HeaderLink href="/blog"
+            ><span class="lg:text-2xl">Blog</span></HeaderLink
+          >
         </li>
-        <li>
+        <li class="list-none">
           <Dropdown class="group lg:text-2xl text-xl">
             <button
               class="flex items-center border-0 rounded-none bg-transparent hover:bg-transparent text-primary-900 hover:text-secondary-900"
             >
-              <span
-                class="lg:text-[1.563rem] med text-primary-900 dark:text-dark-links"
-                >Topics</span
-              >
+              <span class="lg:text-2xl med text-primary-900">Topics</span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -81,7 +82,7 @@ const categories = [
                       // Check if category is defined
                       if (category) {
                         return (
-                          <li class="p-2">
+                          <li class="p-2 list-none">
                             <a
                               href={`/category/${category}`}
                               title={`View posts in "${category}"`}
@@ -101,23 +102,22 @@ const categories = [
             </DropdownItems>
           </Dropdown>
         </li>
-        <li>
-          <HeaderLink href="/press">Press</HeaderLink>
-        </li>
-        <li>
-          <HeaderLink href="https://www.patreon.com/susansilver"
-            >Patreon</HeaderLink
+        <li class="list-none">
+          <HeaderLink href="/press"
+            ><span class="lg:text-2xl">Press</span></HeaderLink
           >
         </li>
-        <li>
+        <li class="list-none">
+          <HeaderLink href="https://www.patreon.com/susansilver"
+            ><span class="lg:text-2xl">Patreon</span></HeaderLink
+          >
+        </li>
+        <li class="list-none">
           <Dropdown class="group lg:text-2xl text-xl">
             <button
               class="flex items-center border-0 rounded-none bg-transparent hover:bg-transparent text-primary-900 hover:text-secondary-900"
             >
-              <span
-                class="lg:text-[1.563rem] med text-primary-900 dark:text-dark-links"
-                >Extras</span
-              >
+              <span class="lg:text-2xl med text-primary-900">Extras</span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -137,12 +137,15 @@ const categories = [
                 class="lg:absolute lg:top-0 bg-white-50 dark:bg-black-900 dark:text-white-50"
               >
                 <ul class="list-none">
-                  <li>
-                    <HeaderLink href="/downloads">Cross Stitch</HeaderLink>
+                  <li class="list-none">
+                    <HeaderLink href="/downloads"
+                      ><span class="lg:text-2xl">Cross Stitch</span></HeaderLink
+                    >
                   </li>
-                  <li>
+                  <li class="list-none">
                     <HeaderLink href="/hitchhikers-guide-to-the-galaxy/"
-                      >Hitchhiker's Guide (42)</HeaderLink
+                      ><span class="lg:text-2xl">Hitchhiker's Guide (42)</span
+                      ></HeaderLink
                     >
                   </li>
                 </ul>
@@ -150,17 +153,19 @@ const categories = [
             </DropdownItems>
           </Dropdown>
         </li>
-        <li>
-          <HeaderLink href="/privacy-policy">Privacy</HeaderLink>
+        <li class="list-none">
+          <HeaderLink href="/privacy-policy"
+            ><span class="lg:text-2xl">Privacy</span></HeaderLink
+          >
         </li>
-        <li>
+        <li class="list-none">
           <HeaderLink
             href="mailto:beautyofmathematics@susansilver.net"
             class="bg-slate-200 dark:bg-slate-700 rounded-xl p-2"
-            >Contact</HeaderLink
+            ><span class="lg:text-2xl">Contact</span></HeaderLink
           >
         </li>
-        <li>
+        <li class="list-none">
           <a href="/rss.xml" class="px-3"
             ><svg
               xmlns="http://www.w3.org/2000/svg"

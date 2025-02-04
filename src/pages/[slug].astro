@@ -152,7 +152,7 @@ const relatedPosts = await getEntries(entry.data.related);
               <div id="article-footer" class="grid">
                 <!-- Tags and Categories -->
                 <ul class="list-none flex justify-start gap-4 grid grid-cols-4">
-                  <li class="category col-span-2">
+                  <li class="category col-span-2 list-none">
                     Category: {
                       entry.data.categories ? (
                         <a
@@ -173,7 +173,7 @@ const relatedPosts = await getEntries(entry.data.related);
                       {
                         entry.data.tags && entry.data.tags.length > 0 ? (
                           entry.data.tags.map((tag) => (
-                            <li class="tag">
+                            <li class="tag list-none">
                               <a
                                 class="hover:text-black-900 visited:text-black-900 text-black-900 underline"
                                 href={`/tag/${tag}`}

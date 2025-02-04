@@ -7,13 +7,14 @@ import mdx from "@astrojs/mdx";
 
 import sitemap from "@astrojs/sitemap";
 
-import tailwind from "@astrojs/tailwind";
-
 import icon from "astro-icon";
+
+import tailwindcss from "@tailwindcss/vite";
 
 // https://astro.build/config
 export default defineConfig({
   site: "https://beautyofmathematics.com",
+
   redirects: {
     "/love-and-mathematics-music-playlist": "/math-love-songs",
     "/infinity-netflix-documentary":
@@ -25,5 +26,10 @@ export default defineConfig({
     "/25-science-gifts/": "/category/memories/",
     "/carnival-of--mathematics/": "/carnival-of-mathematics-221",
   },
-  integrations: [embeds(), mdx(), sitemap(), tailwind(), icon()],
+
+  integrations: [embeds(), mdx(), sitemap(), icon()],
+
+  vite: {
+    plugins: [tailwindcss()],
+  },
 });

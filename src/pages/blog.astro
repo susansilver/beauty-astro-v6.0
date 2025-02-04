@@ -55,7 +55,7 @@ const allTags = [
                         />
                       </div>
                       <div
-                        class="absolute text-balance p-1 title text-black-900"
+                        class="absolute text-balance p-1 title text-black-900 xl"
                         id="article-title"
                       >
                         {post.data.title}
@@ -80,7 +80,7 @@ const allTags = [
                   // Check if category is defined
                   if (tag) {
                     return (
-                      <li class="m-3">
+                      <li class="m-3 list-none">
                         <a
                           class="tag dark:text-white-50 dark:hover:text-white-50 dark:visited:text-white-50 text-black-900 hover:text-black-900 visited:text-black-900 underline"
                           href={`/tag/${tag}`}
