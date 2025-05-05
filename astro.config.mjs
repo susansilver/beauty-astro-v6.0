@@ -11,6 +11,8 @@ import icon from "astro-icon";
 
 import tailwindcss from "@tailwindcss/vite";
 
+import og from "astro-og";
+
 // https://astro.build/config
 export default defineConfig({
   site: "https://beautyofmathematics.com",
@@ -27,7 +29,7 @@ export default defineConfig({
     "/carnival-of--mathematics/": "/carnival-of-mathematics-221",
   },
 
-  integrations: [embeds(), mdx(), sitemap(), icon()],
+  integrations: [embeds(), mdx(), sitemap(), icon(), og()],
 
   vite: {
     plugins: [tailwindcss()],
