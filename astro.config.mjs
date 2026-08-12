@@ -1,19 +1,13 @@
 // @ts-check
 import { defineConfig } from "astro/config";
-
 import embeds from "astro-embed/integration";
-
 import mdx from "@astrojs/mdx";
-
 import sitemap from "@astrojs/sitemap";
-
 import icon from "astro-icon";
-
 import tailwindcss from "@tailwindcss/vite";
-
 import og from "astro-og";
+import { unified } from "@astrojs/markdown-remark";
 
-// https://astro.build/config
 export default defineConfig({
   site: "https://beautyofmathematics.com",
 
@@ -33,5 +27,9 @@ export default defineConfig({
 
   vite: {
     plugins: [tailwindcss()],
+  },
+
+  markdown: {
+    processor: unified(),
   },
 });
