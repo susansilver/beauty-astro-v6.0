@@ -6,7 +6,7 @@ import sitemap from "@astrojs/sitemap";
 import icon from "astro-icon";
 import tailwindcss from "@tailwindcss/vite";
 import og from "astro-og";
-import { unified } from "@astrojs/markdown-remark";
+/* import { unified } from "@astrojs/markdown-remark"; */
 
 export default defineConfig({
   site: "https://beautyofmathematics.com",
@@ -29,7 +29,7 @@ export default defineConfig({
     plugins: [tailwindcss()],
   },
 
-  markdown: {
+  /*  markdown: {
     processor: unified(),
-  },
+  }, */
 });
